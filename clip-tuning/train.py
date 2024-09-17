@@ -1,3 +1,4 @@
+import platform
 import warnings
 
 import clip
@@ -23,7 +24,7 @@ train_files = [f"data_batch_{i}" for i in range(1, 6)]
 test_file = ["test_batch"]
 
 # 数据集所在的本地路径
-data_dir = 'D:/code/dataset/cifar-10-batches-py'
+data_dir = 'D:/code/dataset/cifar-10-batches-py' if platform.system() == 'Windows' else '/home//guohao/dataset/cifar-10-batches-py'
 
 device = "cuda" if torch.cuda.is_available() else "cpu"
 model, preprocess = clip.load("ViT-B/32", device=device)
@@ -128,7 +129,7 @@ def test(model, test_loader, criterion, device):
     return test_loss, test_acc
 
 
-num_epochs = 3  # 设置训练的轮数
+num_epochs = 20  # 设置训练的轮数
 
 for epoch in range(num_epochs):
     train_loss, train_acc = train(fine_tune_model, train_loader, criterion, optimizer, device)
