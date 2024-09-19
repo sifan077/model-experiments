@@ -17,3 +17,7 @@ def request_proxy():
     os.environ['https_proxy'] = proxy
     os.environ['HTTPS_PROXY'] = proxy
     print('---Proxy set to:', proxy, '---')
+
+# 文件windows路径转linux路径
+def windows_path_to_linux(path):
+    return path.replace('\\', '/')
